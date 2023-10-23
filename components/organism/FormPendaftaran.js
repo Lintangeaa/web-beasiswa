@@ -44,8 +44,12 @@ const FormPendaftaran = () => {
   };
 
   const handleDaftar = async () => {
-    if (ipk < 3) {
-      swal('IPK Kurang', 'Maaf, Anda tidak memenuhi syarat beasiswa.', 'error');
+    const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+    if (!emailPattern.test(email)) {
+      swal('Error', 'Format email tidak sesuai.', 'error');
+      return;
+    } else if (!nim || !name || !phone || !semester || ipk < 3 || !berkas) {
+      swal('Error', 'Semua field harus diisi.', 'error');
       return;
     }
 
@@ -80,7 +84,7 @@ const FormPendaftaran = () => {
         window.location.href = '/hasil';
       });
     } catch (error) {
-      console.error('Error:', error);
+      swal('Error', 'Mahasiswa Sudah Terdaftar', 'error');
     }
   };
 
@@ -118,10 +122,11 @@ const FormPendaftaran = () => {
         />
         <InputWithTitle
           title={'Email'}
-          type={'email'}
+          type={email}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <InputWithTitle
           type={'tel'}
           title={'Nomor HP'}

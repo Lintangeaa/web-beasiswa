@@ -11,6 +11,7 @@ const InputWithTitle = ({ title, type, accept, onChange, value, disabled }) => {
         value={value}
         className="w-1/2 p-2 border rounded border-three"
         disabled={disabled}
+        required
       />
     </div>
   );

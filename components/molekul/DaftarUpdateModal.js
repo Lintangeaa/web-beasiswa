@@ -1,8 +1,18 @@
+import { useState } from 'react';
+import InputWithTitle from '../atom/InputWithTitle';
+import swal from 'sweetalert';
+
 const DaftarUpdateModal = ({ isOpen, onClose, onSave, data }) => {
+  const [password, setPassword] = useState('');
   if (!isOpen) return null;
 
   const handleSubmit = () => {
-    onSave(true);
+    if (password === 'password123') {
+      setPassword('');
+      onSave(true);
+    } else {
+      swal('error', 'Password Salah!', 'error');
+    }
   };
 
   return (
@@ -21,17 +31,25 @@ const DaftarUpdateModal = ({ isOpen, onClose, onSave, data }) => {
             Apakah Anda yakin ingin melakukan verifikasi terhadap beasiswa{' '}
             {data.name}?
           </p>
-          <div className="flex space-x-4">
+          <div className="mt-4">
+            <InputWithTitle
+              title={'Password edit'}
+              type={'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="flex mt-4 space-x-4">
             <button
               type="button"
-              className="p-2 mt-5 font-semibold text-white rounded bg-one hover:bg-three"
+              className="p-2 font-semibold text-white rounded bg-one hover:bg-three"
               onClick={handleSubmit}
             >
               Konfirmasi
             </button>
             <button
               type="button"
-              className="p-2 mt-5 font-semibold text-white bg-red-600 rounded hover:bg-three"
+              className="p-2 font-semibold text-white bg-red-600 rounded hover:bg-three"
               onClick={onClose}
             >
               Batal
