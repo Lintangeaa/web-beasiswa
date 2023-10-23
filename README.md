@@ -22,3 +22,4 @@ Didalam folder project terdapat beberapa folder didalamnya. Berikut penjelasan s
  ## hasil (folder untuk menampilkan halaman daftar 'url/hasil')
 
 # store (folder untuk menampung data yang digunakan)
+# web-beasiswa
